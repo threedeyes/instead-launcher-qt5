@@ -4,6 +4,14 @@
 #include <QtGui>
 #include <QtCore>
 #include <QtNetwork>
+#include <QTreeWidgetItem>
+#include <QProgressDialog>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QTextBrowser>
+
+#include "qhttp.h"
 
 namespace Ui
 {

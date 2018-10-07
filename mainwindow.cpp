@@ -94,13 +94,13 @@ MainWindow::MainWindow(const ArgMap &argMap, QWidget *parent)
 
     m_ui->setupUi(this);
 
-    m_ui->listGames->header()->setResizeMode( 0, QHeaderView::Interactive );
-    m_ui->listGames->header()->setResizeMode( 1, QHeaderView::ResizeToContents );
+    m_ui->listGames->header()->setSectionResizeMode( 0, QHeaderView::Interactive );
+    m_ui->listGames->header()->setSectionResizeMode( 1, QHeaderView::ResizeToContents );
     m_ui->listGames->header()->setDefaultAlignment( Qt::AlignHCenter );
-    m_ui->listNewGames->header()->setResizeMode( 0, QHeaderView::Interactive );
-    m_ui->listNewGames->header()->setResizeMode( 1, QHeaderView::Fixed );
-    m_ui->listNewGames->header()->setResizeMode( 2, QHeaderView::Fixed );
-    m_ui->listNewGames->header()->setResizeMode( 3, QHeaderView::ResizeToContents );
+    m_ui->listNewGames->header()->setSectionResizeMode( 0, QHeaderView::Interactive );
+    m_ui->listNewGames->header()->setSectionResizeMode( 1, QHeaderView::Fixed );
+    m_ui->listNewGames->header()->setSectionResizeMode( 2, QHeaderView::Fixed );
+    m_ui->listNewGames->header()->setSectionResizeMode( 3, QHeaderView::ResizeToContents );
     m_ui->listNewGames->headerItem()->setTextAlignment( 1, Qt::AlignHCenter );
     m_ui->listNewGames->headerItem()->setTextAlignment( 2, Qt::AlignHCenter );
     m_ui->listNewGames->headerItem()->setTextAlignment( 3, Qt::AlignHCenter );

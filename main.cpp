@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTextCodec>
 #include "mainwindow.h"
 #include <stdio.h>
@@ -6,23 +6,24 @@
 
 FILE *logFile = 0;
 
-void logMessageOutput(QtMsgType type, const char *msg)
- {
+void logMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+ 	 QByteArray localMsg = msg.toLocal8Bit();
      switch (type) {
      case QtDebugMsg:
-         fprintf(logFile, "Debug: %s\n", msg);
+         fprintf(logFile, "Debug: %s\n", localMsg.constData());
          break;
      case QtWarningMsg:
-         fprintf(logFile, "Warning: %s\n", msg);
+         fprintf(logFile, "Warning: %s\n", localMsg.constData());
          break;
      case QtCriticalMsg:
-         fprintf(logFile, "Critical: %s\n", msg);
+         fprintf(logFile, "Critical: %s\n", localMsg.constData());
          break;
      case QtFatalMsg:
-         fprintf(logFile, "Fatal: %s\n", msg);
+         fprintf(logFile, "Fatal: %s\n", localMsg.constData());
          abort();
      }
- }
+}
 
 void showHelp() {
     printf("instead-launcher [-insteadpath <dir>] [-gamespath <dir>] [-log <logfile>] [-help]\n");
@@ -41,13 +42,12 @@ bool enableLog(char *fileName) {
         return false;
     }
     fprintf(logFile, "Log started\n");
-    qInstallMsgHandler(logMessageOutput);
+    qInstallMessageHandler(logMessageOutput);
     return true;
 }
 
 int qtMain( const ArgMap &argMap, int argc, char *argv[] ) {
     QApplication a(argc, argv);
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf-8"));
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf-8"));
     MainWindow w( argMap );
     w.show();

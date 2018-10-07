@@ -1,7 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-01-17T11:48:50
 # -------------------------------------------------
-QT += network
+QT += widgets core network
 
 TARGET = instead-launcher
 
@@ -16,7 +16,10 @@ SOURCES += main.cpp \
     updatewidget.cpp \
     global.cpp \
     aboutwidget.cpp \
-    urlresolver.cpp
+    urlresolver.cpp \
+    qhttp/qhttp.cpp \
+    qhttp/qhttpauthenticator.cpp
+    
 
 HEADERS += mainwindow.h \
     unzip/unzip.h \
@@ -27,12 +30,15 @@ HEADERS += mainwindow.h \
     config.h \
     global.h \
     aboutwidget.h \
-    urlresolver.h
+    urlresolver.h \
+    qhttp/qhttp.h \
+    qhttp/qhttpauthenticator_p.h \
+    qhttp/qringbuffer_p.h
 
+INCLUDEPATH += ./qhttp
 FORMS += mainwindow.ui
-#LIBS += -qt-zlib # use zlib embedded into qt
 LIBS += -lz
-DEFINES += NOUNCRIPT # need for unzip library build
+DEFINES += NOUNCRIPT
 RESOURCES += instead-launcher.qrc
 TRANSLATIONS += instead-launcher_ru.ts
 win32:INCLUDEPATH += ${QTDIR}/src/3rdparty/zlib
@@ -41,10 +47,6 @@ RC_FILE = resources.rc
 
 unix:exists($$[QT_INSTALL_BINS]/lrelease){
 LRELEASE_EXECUTABLE = $$[QT_INSTALL_BINS]/lrelease
-}
-
-unix:exists($$[QT_INSTALL_BINS]/lrelease-qt4){
-LRELEASE_EXECUTABLE = $$[QT_INSTALL_BINS]/lrelease-qt4
 }
 
 win32:exists($$[QT_INSTALL_BINS]/lrelease.exe){

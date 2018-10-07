@@ -3,6 +3,10 @@
 
 #include <QtGui>
 #include <QtCore>
+#include <QPushButton>
+#include <QLabel>
+#include <QCommandLinkButton>
+#include <QVBoxLayout>
 
 class AboutWidget : public QWidget
 {

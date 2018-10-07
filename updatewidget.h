@@ -4,6 +4,11 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtNetwork>
+#include <QProgressDialog>
+#include <QTextBrowser>
+#include <QMessageBox>
+
+#include "qhttp.h"
 
 class UpdateWidget : public QTextBrowser {
     Q_OBJECT
