@@ -132,6 +132,7 @@ MainWindow::MainWindow(const ArgMap &argMap, QWidget *parent)
     m_listLoadProgress = new QProgressDialog(parent);
     m_listLoadProgress->setLabelText( tr( "Game list downloading" ) + "..." );
     m_listLoadProgress->setWindowIcon( QIcon( ":/resources/icon.png" ) );
+    m_listLoadProgress->reset();
     connect( m_listLoadProgress, SIGNAL(canceled()), this, SLOT(abortGameListDownloading()));
     connect( m_listServer, SIGNAL( dataReadProgress( int, int ) ), m_listLoadProgress, SLOT( setValue( int ) ) );
 
@@ -140,6 +141,7 @@ MainWindow::MainWindow(const ArgMap &argMap, QWidget *parent)
     connect( m_gameServer, SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ), this, SLOT( gameServerResponseHeaderReceived( QHttpResponseHeader ) ) );
     m_gameLoadProgress = new QProgressDialog(parent);
     m_gameLoadProgress->setWindowIcon( QIcon( ":/resources/icon.png" ) );
+    m_gameLoadProgress->reset();
     connect( m_gameServer, SIGNAL( dataReadProgress( int, int ) ), m_gameLoadProgress, SLOT( setValue( int ) ) );
     connect( m_gameLoadProgress, SIGNAL(canceled()), this, SLOT(abortGameDownloading()));
 
@@ -170,13 +172,15 @@ MainWindow::MainWindow(const ArgMap &argMap, QWidget *parent)
     if (m_ui->autoRefreshCheckBox->isChecked()) {
         refreshNetGameList();
     }
-
+#ifndef Q_OS_HAIKU
     m_swUpdateWidget = new UpdateWidget( this );
     m_ui->swUpdateLayout->addWidget( m_swUpdateWidget );
     if (m_ui->autoRefreshSwCheckBox->isChecked()) {
         m_swUpdateWidget->checkUpdates( this, m_ui->lineInsteadPath->text(), true );
     }
-
+#else
+	m_ui->autoRefreshSwCheckBox->setEnabled(false);
+#endif
     if ( !QFile::exists( m_ui->lineInsteadPath->text() ) ) {
 	show();
 	update();
