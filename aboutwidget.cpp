@@ -88,15 +88,13 @@ AboutWidget::AboutWidget( QWidget *parent )
 
     ghvlayout->addLayout( ghblayout );
     ghblayout->addStretch();
+#ifndef Q_OS_HAIKU
     QPushButton *checkUpdatesButton = new QPushButton( tr( "Check software updates" ), iwidget );
     ghblayout->addWidget( checkUpdatesButton );
     ghblayout->addStretch();
-
     ghlvlayout->addStretch();
-
     connect( checkUpdatesButton, SIGNAL( clicked() ), this, SIGNAL( checkUpdatesRequest() ) );
-
-
+#endif
 }
 
 AboutWidget::~AboutWidget()
