@@ -11,7 +11,21 @@ bool checkOrCreateGameDir( QString gameDir ) {
     return dir.mkpath(".");
 }
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_HAIKU
+
+QString getGameDirPath() {
+    return QDir::home().absolutePath() + "/config/settings/Instead/games/";
+}
+
+QString getConfigPath() {
+    return QDir::home().absolutePath() + "/config/settings/Instead/launcher.ini";
+}
+
+QString getDefaultInterpreterPath() {
+    return "/boot/system/apps/Instead/Instead";
+}
+
+#elif defined(Q_OS_UNIX)
 
 QString getGameDirPath() {
     return QDir::home().absolutePath() + "/.instead/games/";
