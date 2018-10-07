@@ -68,7 +68,14 @@ AboutWidget::AboutWidget( QWidget *parent )
 //    insteadProjectButton->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed ) );
     connect( insteadProjectButton, SIGNAL( clicked() ), this, SLOT( goToINSTEADPage() ) );
     ghvlayout->addWidget( insteadProjectButton );
-    QLabel *devs = new QLabel( "<center><b>" + tr( "Developers team" ) + ":</b><br>morkow, rec, <a href=\"mailto:ilja.ryndin@gmail.com\">" + tr( "Ilja Ryndin" ) +"</a></center>", this );
+    QLabel *devs = new QLabel( \
+    	"<center><b>" + \
+    	tr( "Developers team:" ) + \
+    	":</b><br>morkow, rec, <a href=\"mailto:ilja.ryndin@gmail.com\">" + tr( "Ilja Ryndin" ) + "</a><br><br>" + \
+    	"<b>Qt5 port:</b><br>" + \
+    	"<a href=\"mailto:3dEyes@gmail.com\">Gerasim Troeglazov</a>" + \
+    	"</center>", \
+    	this );
     devs->setWordWrap( true );
     devs->setScaledContents( false );
     ghvlayout->addSpacing( 10 );
@@ -114,5 +121,5 @@ void AboutWidget::goToINSTEADPage() {
 }
 
 void AboutWidget::goToINSTEADLauncherPage() {
-    QDesktopServices::openUrl( QString( "https://github.com/instead-hub/instead-launcher" ) );
+    QDesktopServices::openUrl( QString( "https://github.com/threedeyes/instead-launcher-qt5" ) );
 }
